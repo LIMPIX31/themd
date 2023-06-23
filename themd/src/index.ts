@@ -18,9 +18,13 @@ export interface DeriveOptions {
   dry?: number
   ratio?: number
   clamp?: boolean
+  strict?: boolean
 }
 
-export function derive(guides: AnyColor[], { ratio: rate = 0.75, dry = 0.5, clamp = false }: DeriveOptions = {}) {
+export function derive(
+  guides: AnyColor[],
+  { ratio: rate = 0.75, dry = 0.5, clamp = false, strict = false }: DeriveOptions = {},
+) {
   if (guides.length < 2) {
     throw new Error('Themd `derive` requires at least 2 color guides')
   }
@@ -32,9 +36,13 @@ export function derive(guides: AnyColor[], { ratio: rate = 0.75, dry = 0.5, clam
 
     deltas.sort(([a], [b]) => a - b)
 
-    const last = deltas.at(-1)!
+    const top = deltas.at(-1)!
 
-    let result = clrd.mix(colord(last[1]), dry)
+    if (strict) {
+      return colord(top[1]).toHex()
+    }
+
+    let result = clrd.mix(colord(top[1]), dry)
 
     while (rate > 0) {
       const next = deltas.pop()
