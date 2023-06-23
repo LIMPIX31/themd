@@ -1,4 +1,16 @@
 {
-  "name": "autotheme",
-  "packageManager": "yarn@4.0.0-rc.46"
+  "name": "package",
+  "packageManager": "yarn@3.6.0",
+  "type": "module",
+  "workspaces": [
+    "themd",
+    "example"
+  ],
+  "devDependencies": {
+    "@lmpx-config/eslint": "0.0.8",
+    "eslint": "^8.43.0",
+    "prettier": "^2.8.8",
+    "typescript": "~5.1.3"
+  },
+  "tsconfigWorkspaces": true
 }

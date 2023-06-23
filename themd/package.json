@@ -1,0 +1,19 @@
+{
+  "name": "themd",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn lib build"
+  },
+  "dependencies": {
+    "colord": "^2.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts"
+  }
+}
