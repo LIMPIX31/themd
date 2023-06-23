@@ -22,7 +22,7 @@ export interface DeriveOptions {
 
 export function derive(guides: AnyColor[], { rate = 0.75, dry = 0.5, clamp = false }: DeriveOptions = {}) {
   if (guides.length < 2) {
-    throw new Error('Autotheme `derive` requires at least 2 color guides')
+    throw new Error('Themd `derive` requires at least 2 color guides')
   }
 
   return function (target: AnyColor) {
