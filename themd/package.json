@@ -1,13 +1,37 @@
 {
   "name": "themd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src/index.ts",
+  "type": "module",
+  "author": {
+    "name": "Danil Karpenko",
+    "email": "limpix31@gmail.com",
+    "url": "https://github.com/LIMPIX31"
+  },
+  "bugs": {
+    "url": "https://github.com/LIMPIX31/themd/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LIMPIX31/themd"
+  },
+  "homepage": "https://github.com/LIMPIX31/themd#readme",
+  "keywords": [
+    "color",
+    "theme",
+    "automatic",
+    "css",
+    "colors",
+    "colord",
+    "shade",
+    "tint"
+  ],
   "files": [
     "dist"
   ],
   "scripts": {
-    "prepack": "yarn build",
-    "postpack": "rm -rf ./dist",
+    "prepack": "yarn build && cp ../README.md ./",
+    "postpack": "rm -rf ./dist ./README.md",
     "build": "yarn lib build"
   },
   "dependencies": {
