@@ -16,11 +16,11 @@ function clampColor(target: Colord, guides: AnyColor[]) {
 
 export interface DeriveOptions {
   dry?: number
-  rate?: number
+  ratio?: number
   clamp?: boolean
 }
 
-export function derive(guides: AnyColor[], { rate = 0.75, dry = 0.5, clamp = false }: DeriveOptions = {}) {
+export function derive(guides: AnyColor[], { ratio: rate = 0.75, dry = 0.5, clamp = false }: DeriveOptions = {}) {
   if (guides.length < 2) {
     throw new Error('Themd `derive` requires at least 2 color guides')
   }
@@ -47,7 +47,7 @@ export function derive(guides: AnyColor[], { rate = 0.75, dry = 0.5, clamp = fal
 
       const previousRate = rate
       rate -= delta
-      const ratio = rate >= delta ? rate : previousRate
+      const ratio = previousRate >= delta ? delta : previousRate
 
       result = result.mix(guide, ratio)
     }
