@@ -4,16 +4,23 @@ import mixPlugin from 'colord/plugins/mix'
 
 extend([deltaPlugin, mixPlugin])
 
-export function delta(target: Colord, guides: AnyColor[]) {
+function delta(target: Colord, guides: AnyColor[]) {
   return guides.map((guide) => [1 - target.delta(guide), guide] as [number, AnyColor])
+}
+
+function clampColor(target: Colord, guides: AnyColor[]) {
+  const deltas = guides.map((guide) => [target.delta(guide), guide] as [number, AnyColor])
+  deltas.sort(([a], [b]) => a - b)
+  return colord(deltas[0][1])
 }
 
 export interface DeriveOptions {
   dry?: number
   rate?: number
+  clamp?: boolean
 }
 
-export function derive(guides: AnyColor[], { rate = 0.75, dry = 0.5 }: DeriveOptions = {}) {
+export function derive(guides: AnyColor[], { rate = 0.75, dry = 0.5, clamp = false }: DeriveOptions = {}) {
   if (guides.length < 2) {
     throw new Error('Autotheme `derive` requires at least 2 color guides')
   }
@@ -45,6 +52,6 @@ export function derive(guides: AnyColor[], { rate = 0.75, dry = 0.5 }: DeriveOpt
       result = result.mix(guide, ratio)
     }
 
-    return result.toHex()
+    return (clamp ? clampColor(result, guides) : result).toHex()
   }
 }

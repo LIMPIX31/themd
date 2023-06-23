@@ -19,8 +19,8 @@ const guides = [
   '#fdf6e3',
 ]
 
-const target = '#000000'
+const target = '#fff'
 
-const result = derive(guides)(target)
+const result = derive(guides, { clamp: true })(target)
 
 console.log(result)
